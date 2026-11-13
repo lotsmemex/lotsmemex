@@ -1,0 +1,40 @@
+capability_id: memex.item_read
+name: MemeX Item 读取
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: trial
+summary: 从 canonical library 读取 Item 当前 revision 的 JSON 或 Markdown。
+description: format=json 时输出 object；format=markdown 时输出 canonical Markdown string。
+when_to_use: 人或 Agent 已持有有效 item_id，需要读取同一事实源时。
+do_not_use_when: 需要搜索未知 item、读取原始外部 blob 或修改 Item 时。
+input_schema:
+  type: object
+  required: [library_root, item_id]
+  properties:
+    library_root:
+      type: string
+    item_id:
+      type: string
+    format:
+      type: string
+      enum: [json, markdown]
+output_schema:
+  oneOf:
+    - type: object
+      required: [schema_version, item, current_revision]
+      additionalProperties: false
+      properties:
+        schema_version:
+          type: integer
+        item:
+          type: object
+        current_revision:
+          type: object
+    - type: string
+side_effects: none
+approval_required: false
+docs_path: interfaces/memex.item_read.md
+state_path: PROJECT_STATE.md
+examples: []
+last_updated: '2026-07-28'

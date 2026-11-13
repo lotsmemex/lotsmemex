@@ -1,0 +1,5 @@
+capability_id: memex.local_surface
+status: trial
+side_effects: none
+approval_required: false
+contract: foreground IPv4-loopback-only server-rendered HTML; read-only with required sensitivity ceiling

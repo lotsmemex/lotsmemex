@@ -1,0 +1,12 @@
+[package]
+name = "memex-metadata"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Metadata module: title/tag drafts, read-only fields, revision conflict and navigation guard."
+
+[dependencies]
+memex-client = { path = "../memex-client" }
+gpui-kit.workspace = true
+serde_json.workspace = true

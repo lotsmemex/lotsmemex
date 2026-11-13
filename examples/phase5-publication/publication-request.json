@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "publication_kind": "briefing",
+  "product_id": "synthetic",
+  "title": "Synthetic public briefing",
+  "summary": "Synthetic summary only.",
+  "body_markdown": "Synthetic body only.",
+  "inputs": [{"kind": "analysis", "id": "analysis_replace_after_phase4", "revision_id": null}],
+  "topics": ["synthetic"],
+  "requested_sensitivity": "public",
+  "created_at": "2026-07-31T00:00:00Z",
+  "actor_kind": "agent",
+  "actor_id": "synthetic-agent",
+  "tool_id": "memex-example",
+  "tool_version": "0",
+  "config_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}

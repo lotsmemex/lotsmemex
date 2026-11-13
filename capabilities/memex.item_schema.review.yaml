@@ -1,0 +1,35 @@
+capability_id: memex.item_schema.review
+name: MemeX Item Schema 复核
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: draft
+summary: 复核 MemeX item metadata / Markdown representation / export 兼容字段。
+when_to_use: 需要检查 item schema、Markdown 表示、CSL/BibTeX/RIS/Zotero 兼容字段是否合理时。
+do_not_use_when: 需要真实迁移 Zotero 数据库、读取附件库或导出用户私有资料时。
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    artifact_path:
+      type: string
+    output_path:
+      type: string
+output_schema:
+  type: object
+  properties:
+    status:
+      type: string
+    matched_docs:
+      type: array
+    recommendations:
+      type: array
+    written_paths:
+      type: array
+side_effects: file_write
+approval_required: false
+docs_path: interfaces/memex.item_schema.review.md
+state_path: PROJECT_STATE.md
+examples: []
+last_updated: '2026-04-30'

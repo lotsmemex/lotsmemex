@@ -1,0 +1,35 @@
+capability_id: memex.translator_framework.plan
+name: MemeX Translator Framework 规划
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: draft
+summary: 为站点 translator / decoder / recognizer 输出设计方案与接入合同。
+when_to_use: 需要设计或调整 MemeX translator、decoder registry、generic/specialized translator 边界时。
+do_not_use_when: 只是要运行已有抓取脚本，或需要处理登录态浏览器/CDP 时。
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    artifact_path:
+      type: string
+    output_path:
+      type: string
+output_schema:
+  type: object
+  properties:
+    status:
+      type: string
+    matched_docs:
+      type: array
+    recommendations:
+      type: array
+    written_paths:
+      type: array
+side_effects: file_write
+approval_required: false
+docs_path: interfaces/memex.translator_framework.plan.md
+state_path: PROJECT_STATE.md
+examples: []
+last_updated: '2026-04-30'

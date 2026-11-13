@@ -1,0 +1,84 @@
+id: memex.recall
+name: Sensitivity-aware Lexical Recall V0
+owner: MemeX
+version: 0.1.0
+status: trial
+summary: 在 verified current ItemRevision 与 AnalysisRecord 上执行透明、确定性的本地词法召回。
+when_to_use: 调用者需要可解释的本地关键词召回，并明确给出 sensitivity ceiling。
+do_not_use: 语义搜索、embedding、LLM rerank、自动实体推断、跨库搜索或 Web 公共授权判断。
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [library, query, max_sensitivity, limit]
+  additionalProperties: false
+  properties:
+    library: {type: string, minLength: 1}
+    query: {type: string, minLength: 1, maxLength: 4096}
+    max_sensitivity:
+      enum: [public, internal, private, restricted]
+    limit: {type: integer, minimum: 1, maximum: 100}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [schema_version, retrieval_mode, query, max_sensitivity, hit_count, hits]
+  additionalProperties: false
+  properties:
+    schema_version: {const: 1}
+    retrieval_mode: {const: lexical_v0}
+    query: {type: string}
+    max_sensitivity:
+      enum: [public, internal, private, restricted]
+    hit_count: {type: integer, minimum: 0, maximum: 100}
+    hits:
+      type: array
+      maxItems: 100
+      items:
+        type: object
+        required:
+          - target_kind
+          - id
+          - revision_id
+          - title
+          - snippet
+          - sensitivity
+          - score
+          - matched_terms
+          - score_breakdown
+        additionalProperties: false
+        properties:
+          target_kind:
+            enum: [analysis, item_revision]
+          id:
+            type: string
+            minLength: 1
+          revision_id:
+            type: [string, 'null']
+          title:
+            type: string
+          snippet:
+            type: string
+            maxLength: 320
+          sensitivity:
+            enum: [public, internal, private, restricted]
+          score:
+            type: integer
+            minimum: 1
+          matched_terms:
+            type: array
+            uniqueItems: true
+            items: {type: string, minLength: 1}
+          score_breakdown:
+            type: object
+            required: [exact_phrase, title_terms, topic_terms, body_terms]
+            additionalProperties: false
+            properties:
+              exact_phrase: {enum: [0, 100]}
+              title_terms: {type: integer, minimum: 0, multipleOf: 20}
+              topic_terms: {type: integer, minimum: 0, multipleOf: 10}
+              body_terms: {type: integer, minimum: 0, multipleOf: 2}
+side_effects: none
+approval: false
+docs: interfaces/memex.recall.md
+state: trial
+examples: examples/phase4-analysis-recall
+date: '2026-07-31'

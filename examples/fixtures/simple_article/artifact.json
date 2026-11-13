@@ -1,0 +1,19 @@
+{
+  "source_url": "https://example.com/simple-article",
+  "canonical_url": "https://example.com/simple-article",
+  "site": "example.com",
+  "captured_at": "2026-05-14T08:22:24+08:00",
+  "capture_method": "manual_fixture",
+  "route_used": "manual_import",
+  "title": "Simple Article",
+  "raw": {
+    "html_path": null,
+    "text_path": "raw.txt",
+    "metadata_path": null
+  },
+  "hints": {
+    "content_type": "article",
+    "language": "en",
+    "preferred_translator": "generic.webpage.v0"
+  }
+}

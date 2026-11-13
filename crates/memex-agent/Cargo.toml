@@ -1,0 +1,41 @@
+[package]
+name = "memex-agent"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+base64.workspace = true
+brotli.workspace = true
+chrono.workspace = true
+flate2.workspace = true
+getrandom.workspace = true
+hmac.workspace = true
+hpke.workspace = true
+hex.workspace = true
+libc.workspace = true
+memex-analysis = { path = "../memex-analysis" }
+memex-capture = { path = "../memex-capture" }
+memex-core = { path = "../memex-core" }
+memex-intake = { path = "../memex-intake" }
+memex-library = { path = "../memex-library" }
+memex-models = { path = "../memex-models" }
+memex-provider = { path = "../memex-provider" }
+memex-store = { path = "../memex-store" }
+lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }
+reqwest.workspace = true
+rusqlite.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+subtle.workspace = true
+tempfile.workspace = true
+tokio.workspace = true
+url.workspace = true
+uuid.workspace = true
+zeroize.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

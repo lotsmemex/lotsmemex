@@ -1,0 +1,63 @@
+id: memex.analysis_link
+name: Explicit Analysis Link V0
+owner: MemeX
+version: 0.1.0
+status: trial
+summary: 在 verified analysis 与 analysis/current ItemRevision endpoint 之间创建不可变显式关系。
+when_to_use: 人或 Agent 已明确关系、理由与 provenance，并能提供同一 library 中的 endpoint IDs。
+do_not_use: 自动关系推断、自动反向 link、stale ItemRevision、旧 graph 批量迁移或生产发布。
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [library, request]
+  additionalProperties: false
+  properties:
+    library: {type: string, minLength: 1}
+    request: {type: string, minLength: 1}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [link_id, status, sensitivity, from_analysis_id, target, warning_codes]
+  additionalProperties: false
+  properties:
+    link_id:
+      type: string
+      pattern: '^analysis_link_[0-9a-f]{64}$'
+    status:
+      enum: [created, replayed]
+    sensitivity:
+      enum: [public, internal, private, restricted]
+    from_analysis_id:
+      type: string
+      pattern: '^analysis_[0-9a-f]{64}$'
+    target:
+      oneOf:
+        - type: object
+          required: [kind, id, revision_id]
+          additionalProperties: false
+          properties:
+            kind: {const: analysis}
+            id:
+              type: string
+              pattern: '^analysis_[0-9a-f]{64}$'
+            revision_id: {type: 'null'}
+        - type: object
+          required: [kind, id, revision_id]
+          additionalProperties: false
+          properties:
+            kind: {const: item_revision}
+            id:
+              type: string
+              pattern: '^item_[A-Za-z0-9_-]+$'
+            revision_id:
+              type: string
+              pattern: '^revision_[A-Za-z0-9_-]+$'
+    warning_codes:
+      type: array
+      maxItems: 0
+side_effects: 仅写指定 library 的 analysis/links immutable JSON。
+approval: false
+docs: interfaces/memex.analysis_link.md
+state: trial
+examples: examples/phase4-analysis-recall
+date: '2026-07-31'

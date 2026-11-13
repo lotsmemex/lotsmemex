@@ -1,0 +1,60 @@
+[workspace]
+members = [
+  "crates/memex-core",
+  "crates/memex-registry",
+  "crates/memex-ingest",
+  "crates/memex-store",
+  "crates/memex-query",
+  "crates/memex-library",
+  "crates/memex-models",
+  "crates/memex-provider",
+  "crates/memex-analysis",
+  "crates/memex-publication",
+  "crates/memex-surface",
+  "crates/memex-intake",
+  "crates/memex-capture",
+  "crates/memex-agent",
+  "crates/memex-cli",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/lotsmemex/lotsmemex"
+
+[workspace.dependencies]
+anyhow = "1"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+hex = "0.4"
+fs2 = "0.4"
+getrandom = "0.2"
+libc = "0.2"
+tempfile = "3"
+url = "2"
+uuid = { version = "1", features = ["v7"] }
+tiny_http = "0.12"
+rusqlite = { version = "0.32", features = ["bundled"] }
+# Agent fetches deliberately disable reqwest's proxy, redirect, cookie and
+# decompression behavior; rustls supplies hostname-verified TLS. Tokio supplies
+# one absolute timeout around connect, headers, and the bounded body stream.
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
+tokio = { version = "1", features = ["rt", "time"] }
+flate2 = "1"
+brotli = "7"
+html5ever = "0.39.0"
+subtle = "2"
+pulldown-cmark = "0.13"
+base64 = "0.22"
+hmac = "0.12"
+hpke = { version = "0.14", default-features = false, features = ["alloc", "x25519", "aes"] }
+zeroize = "1"
+
+# dom_smoothie 0.18.0 is patched in lots-scout to make equal-score candidate ordering
+# deterministic; a git dependency does not inherit that patch, so it is repeated here.
+[patch.crates-io]
+dom_smoothie = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }

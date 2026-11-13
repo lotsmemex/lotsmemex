@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "source_id": "source_synthetic_example",
+  "name": "Synthetic Example",
+  "source_kind": "webpage",
+  "canonical_uris": ["https://example.test/phase1"],
+  "evidence_roles": ["primary"],
+  "default_sensitivity": "public",
+  "preferred_translator": "generic.webpage"
+}

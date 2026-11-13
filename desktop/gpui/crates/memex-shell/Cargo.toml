@@ -1,0 +1,38 @@
+[package]
+name = "memex-shell"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "memex-desktop"
+path = "src/main.rs"
+
+[dependencies]
+gpui-kit.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+memex-client = { path = "../memex-client" }
+memex-library = { path = "../memex-library" }
+memex-metadata = { path = "../memex-metadata" }
+memex-reader = { path = "../memex-reader" }
+memex-chat = { path = "../memex-chat" }
+memex-settings = { path = "../memex-settings" }
+image = { version = "0.25", default-features = false, features = ["png"], optional = true }
+gpui-pre = { version = "=0.3.10", features = ["test-support"], optional = true }
+gpui-pre-platform = { version = "=0.3.10", features = ["test-support"], optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+# Preferred-language lookup for the `system` interface language (already in the lock via GPUI).
+core-foundation = "0.10"
+core-foundation-sys = "0.8"
+
+[dev-dependencies]
+# Headless UI tests (TestAppContext); already in the lock through `dev-snapshot`.
+gpui-pre = { version = "=0.3.10", features = ["test-support"] }
+
+[features]
+# Development only: scripted walk through the UI states, saving GPUI's own
+# Metal render of the live window (needs gpui test-support). Not for release.
+dev-snapshot = ["dep:gpui-pre", "dep:gpui-pre-platform", "dep:image", "memex-reader/dev-snapshot"]

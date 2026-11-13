@@ -1,0 +1,6 @@
+tunnel: __NAMED_TUNNEL_SELECTOR__
+credentials-file: __OWNER_0600_CREDENTIALS_FILE__
+ingress:
+  - hostname: __RELAY_HOSTNAME__
+    service: http://127.0.0.1:__HIGH_LOOPBACK_PORT__
+  - service: http_status:404

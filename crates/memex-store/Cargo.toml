@@ -1,0 +1,24 @@
+[package]
+name = "memex-store"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+chrono.workspace = true
+memex-core = { path = "../memex-core" }
+serde_json.workspace = true
+serde.workspace = true
+sha2.workspace = true
+pulldown-cmark.workspace = true
+fs2.workspace = true
+url.workspace = true
+libc.workspace = true
+jiff = "0.2.28"
+unicode-segmentation = "1.13"
+image = { version = "=0.25.10", default-features = false, features = ["jpeg", "png", "webp"] }
+
+[dev-dependencies]
+tempfile.workspace = true

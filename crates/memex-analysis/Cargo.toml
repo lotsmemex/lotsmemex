@@ -1,0 +1,20 @@
+[package]
+name = "memex-analysis"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+chrono.workspace = true
+fs2.workspace = true
+libc.workspace = true
+memex-core = { path = "../memex-core" }
+memex-store = { path = "../memex-store" }
+pulldown-cmark.workspace = true
+rusqlite.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+tempfile.workspace = true

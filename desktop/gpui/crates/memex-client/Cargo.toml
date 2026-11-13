@@ -1,0 +1,18 @@
+[package]
+name = "memex-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Owner-only UDS transport, DTOs and capability mapping for the MemeX desktop."
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+libc = "0.2"
+regex = "1"
+base64 = "0.22"
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"

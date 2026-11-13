@@ -1,0 +1,14 @@
+capability_id: memex.zotero_translator.convert_plan
+name: Zotero Translator 到 MemeX Markdown Translator 转换规划
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: draft
+summary: 将 Zotero translator 的识别、字段抽取和附件线索转成 MemeX 的 AI/人类可读 Markdown translator script 与 Rust-readable manifest。
+when_to_use: 需要把 Zotero translator 库或单个站点 translator 吸收到 MemeX translator 体系时。
+do_not_use_when: 需要直接执行登录态抓取、绕过站点风控、读取用户 Zotero 私有库、调用外部 API 或远端 push 时。
+interface_path: ../memex/interfaces/memex.zotero_translator.convert_plan.md
+docs_path: ../memex/INTERFACES.md
+state_path: ../memex/PROJECT_STATE.md
+side_effects: file_write
+approval_required: false

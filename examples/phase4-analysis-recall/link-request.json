@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "from_analysis_id": "analysis_0000000000000000000000000000000000000000000000000000000000000000",
+  "target": {
+    "kind": "item_revision",
+    "id": "item_replace_after_ingest",
+    "revision_id": "revision_replace_after_ingest"
+  },
+  "relation": "supports",
+  "rationale_markdown": "Synthetic explicit rationale for the example only.",
+  "created_at": "2026-07-31T00:01:00Z",
+  "actor_kind": "agent",
+  "actor_id": "synthetic-agent",
+  "tool_id": "memex-example",
+  "tool_version": "0",
+  "config_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}

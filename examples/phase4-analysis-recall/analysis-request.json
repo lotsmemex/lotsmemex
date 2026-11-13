@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "analysis_kind": "summary",
+  "title": "Synthetic Analysis",
+  "body_markdown": "This is synthetic analysis text. It contains no private or production data.",
+  "item_ids": [
+    "item_replace_after_ingest"
+  ],
+  "topics": [
+    "synthetic",
+    "memex"
+  ],
+  "requested_sensitivity": "public",
+  "created_at": "2026-07-31T00:00:00Z",
+  "actor_kind": "agent",
+  "actor_id": "synthetic-agent",
+  "tool_id": "memex-example",
+  "tool_version": "0",
+  "config_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}

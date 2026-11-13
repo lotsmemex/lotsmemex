@@ -1,0 +1,1 @@
+{"runId":"synthetic-phase2","expectedSources":["source-a","source-b"],"ok":[{"source":"source-a","file":"/ignored/path"},{"source":"source-b","file":"/ignored/path"}],"fail":[],"createdAt":"2026-07-30T00:00:00Z"}

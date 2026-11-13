@@ -1,0 +1,5 @@
+capability_id: memex.agent_api.read
+status: trial
+side_effects: none
+approval_required: false
+contract: loopback-only JSON read API sharing the local surface sensitivity ceiling

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "publication_id": "publication_replace_after_create",
+  "target": "yuanfang_public_v1",
+  "field_allowlist": ["title", "citations"],
+  "published_at": "2026-07-31T01:00:00Z",
+  "actor_kind": "agent",
+  "actor_id": "synthetic-agent",
+  "tool_id": "memex-example",
+  "tool_version": "0",
+  "config_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}

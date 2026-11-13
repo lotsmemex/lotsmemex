@@ -1,0 +1,3 @@
+This is a simple captured article.
+
+It is used to verify MemeX ingest and generic webpage translation.

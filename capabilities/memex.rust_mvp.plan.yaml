@@ -1,0 +1,35 @@
+capability_id: memex.rust_mvp.plan
+name: MemeX Rust MVP 实施规划
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: draft
+summary: 为 MemeX Rust CLI/library MVP 输出实施计划、crate 边界与测试门禁。
+when_to_use: 准备实现 MemeX Rust MVP、拆 crate、写 CLI 或安排 TDD 任务时。
+do_not_use_when: 需要直接发布桌面 App、调用外部服务、远端 push 或安装系统依赖时。
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    artifact_path:
+      type: string
+    output_path:
+      type: string
+output_schema:
+  type: object
+  properties:
+    status:
+      type: string
+    matched_docs:
+      type: array
+    recommendations:
+      type: array
+    written_paths:
+      type: array
+side_effects: file_write
+approval_required: false
+docs_path: interfaces/memex.rust_mvp.plan.md
+state_path: PROJECT_STATE.md
+examples: []
+last_updated: '2026-04-30'

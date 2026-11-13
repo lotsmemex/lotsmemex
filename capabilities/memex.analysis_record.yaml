@@ -1,0 +1,51 @@
+id: memex.analysis_record
+name: Analysis Record V0
+owner: MemeX
+version: 0.1.0
+status: trial
+summary: 从已验证的 current ItemRevision 创建不可变、可回放、可携带生成文本 provenance 的 authored analysis record。
+when_to_use: 人或 Agent 已显式提供本地 request JSON，且每个输入 Item 都在同一 MemeX library 中。
+do_not_use: 自动事实判断、旧 intelligence 正文迁移、历史 revision 引用、由本能力直接调用在线模型或生产发布。
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [library, request]
+  additionalProperties: false
+  properties:
+    library: {type: string, minLength: 1}
+    request: {type: string, minLength: 1}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [analysis_id, status, sensitivity, input_item_ids, warning_codes]
+  additionalProperties: false
+  properties:
+    analysis_id:
+      type: string
+      pattern: '^analysis_[0-9a-f]{64}$'
+    status:
+      enum: [created, replayed]
+    sensitivity:
+      enum: [public, internal, private, restricted]
+    input_item_ids:
+      type: array
+      minItems: 1
+      maxItems: 64
+      uniqueItems: true
+      items:
+        type: string
+        pattern: '^item_[A-Za-z0-9_-]+$'
+    warning_codes:
+      type: array
+      uniqueItems: true
+      items:
+        enum:
+          - record_markdown_projection_pending
+          - analysis_json_index_projection_pending
+          - analysis_markdown_index_projection_pending
+side_effects: 仅写指定 library 的 analysis/records 与 derived analysis indexes。
+approval: false
+docs: interfaces/memex.analysis_record.md
+state: trial
+examples: examples/phase4-analysis-recall
+date: '2026-07-31'

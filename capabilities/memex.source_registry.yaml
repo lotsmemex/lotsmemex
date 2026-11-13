@@ -1,0 +1,65 @@
+id: memex.source_registry
+name: Source Registry V0
+owner: MemeX
+version: 0.1.0
+status: trial
+summary: 以只读 legacy profile 创建可回放的 canonical source registry。
+when_to_use: 调用者明确提供合成或受控的相对 profile 路径时。
+do_not_use: 真实私有 profile、自动扫描、runtime cutover 或旧 registry 写入。
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [package_root, profiles, library]
+  additionalProperties: false
+  properties:
+    package_root: {type: string}
+    profiles: {type: array, minItems: 1, maxItems: 1000, items: {type: string}}
+    library: {type: string}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [schema_version, adapter_id, adapter_version, input_files, preflight, summary, sources]
+  additionalProperties: false
+  properties:
+    schema_version: {const: 1}
+    adapter_id: {const: intelligence-source-registry.legacy-profile.v0}
+    adapter_version: {const: '0'}
+    preflight: {const: passed}
+    input_files:
+      type: array
+      items: {type: object, required: [relative_path, sha256], additionalProperties: false, properties: {relative_path: {type: string}, sha256: {type: string}}}
+    summary:
+      type: object
+      required: [total, created, revised, replayed, failed, unattempted, lossy]
+      additionalProperties: false
+      properties:
+        total: {type: integer, minimum: 0}
+        created: {type: integer, minimum: 0}
+        revised: {type: integer, minimum: 0}
+        replayed: {type: integer, minimum: 0}
+        failed: {type: integer, minimum: 0}
+        unattempted: {type: integer, minimum: 0}
+        lossy: {type: integer, minimum: 0}
+    sources:
+      type: array
+      items:
+        type: object
+        required: [profile_ref_sha256, source_id, revision_id, revision_number, status, mapped_fields, unmapped_fields, defaulted_fields, warning_codes, error_code]
+        additionalProperties: false
+        properties:
+          profile_ref_sha256: {type: string}
+          source_id: {type: string}
+          revision_id: {type: [string, 'null']}
+          revision_number: {type: [integer, 'null']}
+          status: {enum: [created, revised, replayed, failed, unattempted]}
+          mapped_fields: {type: array, items: {type: string}}
+          unmapped_fields: {type: array, items: {type: string}}
+          defaulted_fields: {type: array, items: {type: string}}
+          warning_codes: {type: array, items: {enum: [absolute_path_value_omitted, source_index_projection_pending, global_index_projection_pending]}}
+          error_code: {type: [string, 'null']}
+side_effects: 仅写 library/registry。
+approval: false
+docs: interfaces/memex.source_registry.md
+state: trial
+examples: examples/phase3-source-registry
+date: 2026-07-31

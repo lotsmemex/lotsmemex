@@ -1,0 +1,49 @@
+id: memex.public_projection
+name: Public Projection V0
+owner: MemeX
+version: 0.1.0
+status: trial
+summary: 对已验证 Public Publication 创建本地 immutable release 与 allowlisted bundle。
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [library, request]
+  additionalProperties: false
+  properties:
+    library: {type: string, minLength: 1}
+    request: {type: string, minLength: 1}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [release_id, status, publication_id, target, field_allowlist, citation_count, warning_codes]
+  additionalProperties: false
+  properties:
+    release_id: {type: string, pattern: '^release_[0-9a-f]{64}$'}
+    status: {enum: [created, replayed]}
+    publication_id: {type: string, pattern: '^publication_[0-9a-f]{64}$'}
+    target: {const: yuanfang_public_v1}
+    field_allowlist:
+      type: array
+      minItems: 2
+      maxItems: 5
+      uniqueItems: true
+      items: {enum: [title, summary, body_markdown, topics, citations]}
+      oneOf:
+        - {const: [title, citations]}
+        - {const: [title, summary, citations]}
+        - {const: [title, body_markdown, citations]}
+        - {const: [title, topics, citations]}
+        - {const: [title, summary, body_markdown, citations]}
+        - {const: [title, summary, topics, citations]}
+        - {const: [title, body_markdown, topics, citations]}
+        - {const: [title, summary, body_markdown, topics, citations]}
+    citation_count: {type: integer, minimum: 1}
+    warning_codes:
+      type: array
+      maxItems: 3
+      uniqueItems: true
+      items: {enum: [public_manifest_projection_pending, public_json_projection_pending, public_markdown_projection_pending]}
+side_effects: 仅在指定 library 写 immutable releases 与本地 derived public bundle；不部署、不更新 latest。
+approval: false
+docs: interfaces/memex.public_projection.md
+examples: examples/phase5-publication

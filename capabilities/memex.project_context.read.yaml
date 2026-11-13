@@ -1,0 +1,35 @@
+capability_id: memex.project_context.read
+name: MemeX 项目上下文读取
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: trial
+summary: 读取 MemeX 项目定位、边界、状态、文档入口与上下游关系。
+when_to_use: 需要判断 MemeX 是否承接某个知识管理、translator、schema、Rust MVP 或资料入库任务时。
+do_not_use_when: 需要真实抓取网页、调用外部 API、读取用户私有资料库或修改运行态服务时。
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    artifact_path:
+      type: string
+    output_path:
+      type: string
+output_schema:
+  type: object
+  properties:
+    status:
+      type: string
+    matched_docs:
+      type: array
+    recommendations:
+      type: array
+    written_paths:
+      type: array
+side_effects: none
+approval_required: false
+docs_path: interfaces/memex.project_context.read.md
+state_path: PROJECT_STATE.md
+examples: []
+last_updated: '2026-04-30'

@@ -1,0 +1,39 @@
+capability_id: memex.evidence_ingest
+name: MemeX 本地证据入库
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: trial
+summary: 校验 self-contained CaptureEnvelope，并幂等写入 canonical Evidence/Item library。
+when_to_use: 已有本地 source.json、capture.json 与声明 checksum 的公开或获授权 artifact 时。
+do_not_use_when: 需要在线抓取、登录态、Cookie、外部 API，或输入文件不在 capture bundle 内时。
+input_schema:
+  type: object
+  required: [source_path, capture_path, library_root]
+  properties:
+    source_path:
+      type: string
+    capture_path:
+      type: string
+    library_root:
+      type: string
+output_schema:
+  type: object
+  properties:
+    capture_id:
+      type: string
+    evidence_ids:
+      type: array
+    item_ids:
+      type: array
+    revision_ids:
+      type: array
+    idempotent_replay:
+      type: boolean
+side_effects: local_file_write
+approval_required: false
+docs_path: interfaces/memex.evidence_ingest.md
+state_path: PROJECT_STATE.md
+examples:
+  - examples/phase1-evidence
+last_updated: '2026-07-28'

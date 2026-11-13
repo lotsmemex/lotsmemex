@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lots MemeX 设置</title>
+  <link rel="stylesheet" href="/remote/v1/app.css">
+</head>
+<body>
+  <main class="shell secondary-shell">
+    <header class="secondary-header"><a class="nav-button" href="/">← 返回资料库</a><a class="nav-button" href="/account">用户</a></header>
+    <p class="eyebrow">Lots MemeX</p><h1>设置</h1>
+    <div class="connection" aria-live="polite"><span id="connection-dot" class="dot"></span><span id="connection-state">正在安全启动…</span></div>
+
+    <section class="settings-section">
+      <h2>远程连接</h2>
+      <section id="unpaired" class="subpanel" hidden><h3>连接这台设备</h3><p>使用本页相机扫描 Mac Lots MemeX 设置窗口中的一次性配对码。</p><button id="scan-pairing-button" type="button">扫描 Mac 配对码</button><p class="help">扫描不会打开新网页或启动登录。配对码只在本页内处理，五分钟后失效。</p></section>
+      <section id="paired" class="subpanel" hidden><h3>设备已连接</h3><p class="help">生成新配对码不会断开当前可信设备。只有新设备成功握手或在 Mac 上明确撤销后，现有信任才会改变。</p></section>
+      <section id="pairing-scanner" class="subpanel" hidden><h3>扫描 Mac 配对码</h3><div class="camera-frame"><video id="pairing-video" muted playsinline></video></div><canvas id="pairing-canvas" hidden></canvas><p id="pairing-scan-status" class="help" aria-live="polite">请将二维码放入取景框。</p><button id="cancel-pairing-button" class="secondary" type="button">取消扫描</button></section>
+    </section>
+
+    <section id="capture" class="settings-section" hidden><h2>采集公开网页</h2><p class="help">次要入口；主要采集方式是浏览器扩展。</p><form id="capture-form"><label for="capture-url">公开 HTTPS 网址</label><textarea id="capture-url" name="url" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" maxlength="8192" rows="4" wrap="soft" aria-describedby="form-help" required placeholder="https://example.org/article"></textarea><button id="submit-button" type="submit">提交采集</button></form><p id="form-help" class="help">Mac 会执行抓取、批准与存储检查。</p></section>
+    <section id="job" class="settings-section" hidden><h2 id="job-heading">采集状态</h2><p id="job-status" class="status" aria-live="polite"></p><div class="actions"><button id="refresh-button" type="button">刷新状态</button><button id="reconfirm-button" type="button" hidden>作为新请求提交</button><button id="cancel-button" class="secondary" type="button">停止本机检查</button></div></section>
+    <article id="result" class="settings-section result" hidden><h2 id="result-title"></h2><pre id="result-body"></pre><a id="library-link" class="primary-link" href="/" hidden>返回资料库</a></article>
+    <section id="unsupported" class="notice" hidden><h2 id="unsupported-heading">浏览器不受支持</h2><p id="unsupported-message">此浏览器无法安全保存所需的私钥。</p></section>
+    <section id="error-card" class="notice error" hidden role="alert"><h2>暂时无法继续</h2><p id="error-message"></p></section>
+  </main>
+  <script src="/remote/v1/jsqr.js"></script>
+  <script>
+  {
+    const invalid = Boolean(window.location.search || window.location.hash);
+    const fail = () => { window.history.replaceState(null, '', window.location.pathname || '/'); document.getElementById('connection-state').textContent = '请直接打开本页'; document.getElementById('unsupported').hidden = false; };
+    if (invalid) fail(); else import('/remote/v1/app.mjs').then(({ start }) => start({ fragment: '', hadQuery: false, pageHref: window.location.href })).catch(() => { document.getElementById('connection-state').textContent = '暂时不可用'; document.getElementById('unsupported').hidden = false; });
+  }
+  </script>
+</body>
+</html>

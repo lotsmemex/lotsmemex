@@ -1,0 +1,21 @@
+{
+  "name": "lotsmemex",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "mobile:demo": "node mobile/web/serve.mjs",
+    "mobile:gateway": "node remote/service/mobile-gateway.js run",
+    "mobile:pair": "node remote/service/mobile-gateway.js pair",
+    "test": "node --test remote/test/"
+  },
+  "dependencies": {
+    "jsqr": "1.4.0",
+    "qrcode": "1.5.4",
+    "ws": "8.21.3"
+  }
+}

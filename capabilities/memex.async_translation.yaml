@@ -1,0 +1,50 @@
+capability_id: memex.async_translation
+status: trial
+side_effects: local_file_write
+approval_required: false
+contract: durable revision-bound English-to-Chinese translation queue with provider-neutral worker and validated AnalysisRecord application
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  additionalProperties: false
+  required: [library, item_id, revision_id]
+  properties:
+    library: {type: string, minLength: 1}
+    item_id: {type: string, pattern: '^item_[A-Za-z0-9_-]+$'}
+    revision_id: {type: string, pattern: '^revision_[A-Za-z0-9_-]+$'}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  oneOf:
+    - type: object
+      additionalProperties: false
+      required: [outcome, job]
+      properties:
+        outcome: {const: enqueued}
+        job:
+          type: object
+          additionalProperties: false
+          required: [job_id, item_id, revision_id, source_language, target_language, state, attempt_count, retryable, created_at, updated_at]
+          properties:
+            job_id: {type: string, pattern: '^translation_[0-9a-f]{64}$'}
+            item_id: {type: string, pattern: '^item_[A-Za-z0-9_-]+$'}
+            revision_id: {type: string, pattern: '^revision_[A-Za-z0-9_-]+$'}
+            source_language: {const: en}
+            target_language: {const: zh-CN}
+            state: {enum: [queued, running, succeeded, failed]}
+            reason_code:
+              type: [string, 'null']
+              enum: [analysis_conflict, invalid_provider_configuration, malformed_model_output, manual_retry, provider_failure, provider_model_mismatch, provider_timeout, retry_exhausted, stale_revision, worker_recovered, null]
+            attempt_count: {type: integer, minimum: 0, maximum: 3}
+            retryable: {type: boolean}
+            created_at: {type: string, format: date-time}
+            updated_at: {type: string, format: date-time}
+    - type: object
+      additionalProperties: false
+      required: [outcome, item_id, revision_id, reason]
+      properties:
+        outcome: {const: skipped}
+        item_id: {type: string, pattern: '^item_[A-Za-z0-9_-]+$'}
+        revision_id: {type: string, pattern: '^revision_[A-Za-z0-9_-]+$'}
+        reason:
+          enum: [already_chinese, challenge_or_login, source_language_unknown, source_too_large, stale_revision, unsupported_item_type]
+docs: interfaces/memex.async_translation.md

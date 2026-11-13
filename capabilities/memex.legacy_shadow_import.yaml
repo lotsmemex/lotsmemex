@@ -1,0 +1,79 @@
+capability_id: memex.legacy_shadow_import
+name: Legacy Normalized JSONL Shadow Import
+owner_project: memex
+owner_agent: memex
+version: 0.1.0
+status: trial
+summary: 将显式选择的旧 normalized JSONL 以只读 shadow adapter 导入隔离 library。
+when_to_use: 已有合成或受控 package root，且调用者可明确提供 meta 与每个 JSONL 相对路径时。
+do_not_use_when: 需要读取真实资料、自动扫描目录、信任 meta 内 file 路径或迁移旧 runtime 时。
+input_schema:
+  type: object
+  required: [package_root, meta_path, item_paths, library_root]
+  properties:
+    package_root:
+      type: string
+      description: 受控 package 根目录。
+    meta_path:
+      type: string
+      description: 相对 package_root 的 run meta 路径。
+    item_paths:
+      type: array
+      minItems: 1
+      items:
+        type: string
+      description: 调用者显式选择的相对 JSONL 路径。
+    library_root:
+      type: string
+      description: 隔离 MemeX library 路径。
+output_schema:
+  type: object
+  required: [schema_version, adapter_id, run_ref_sha256, input_files, preflight, summary, items]
+  properties:
+    schema_version:
+      type: integer
+    adapter_id:
+      type: string
+    run_ref_sha256:
+      type: string
+    input_files:
+      type: array
+      items:
+        type: object
+        required: [path, sha256]
+        properties:
+          path: { type: string, description: 相对输入路径。 }
+          sha256: { type: string, description: 输入文件摘要。 }
+    preflight:
+      type: string
+    summary:
+      type: object
+      required: [total, created, replayed, failed, lossy]
+      properties:
+        total: { type: integer }
+        created: { type: integer }
+        replayed: { type: integer }
+        failed: { type: integer }
+        lossy: { type: integer }
+    items:
+      type: array
+      items:
+        type: object
+        required: [legacy_ref_sha256, item_id, capture_id, status, mapped_fields, unmapped_fields, defaulted_fields, provenance_gaps, error_code]
+        properties:
+          legacy_ref_sha256: { type: string }
+          item_id: { type: [string, 'null'] }
+          capture_id: { type: [string, 'null'] }
+          status: { enum: [created, replayed, failed, unattempted] }
+          mapped_fields: { type: array, items: { type: string } }
+          unmapped_fields: { type: array, items: { type: string } }
+          defaulted_fields: { type: array, items: { type: string } }
+          provenance_gaps: { type: array, items: { type: string } }
+          error_code: { type: [string, 'null'] }
+side_effects: 全量 preflight 成功后按 item 单事务写隔离 library；失败可安全重跑。
+approval_required: false
+docs_path: interfaces/memex.legacy_shadow_import.md
+state_path: PROJECT_STATE.md
+examples:
+  - examples/phase2-legacy-shadow
+last_updated: '2026-07-30'

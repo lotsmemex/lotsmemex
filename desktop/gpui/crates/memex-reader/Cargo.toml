@@ -1,0 +1,18 @@
+[package]
+name = "memex-reader"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Reader module: tabs, original/translation, long-text blocks and revision-bound citation jumps."
+
+[dependencies]
+memex-client = { path = "../memex-client" }
+gpui-kit.workspace = true
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "webp"] }
+serde_json.workspace = true
+
+[dev-dependencies]
+
+[features]
+dev-snapshot = []

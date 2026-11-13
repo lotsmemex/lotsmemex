@@ -1,0 +1,35 @@
+id: memex.publication_record
+name: Publication Record V0
+owner: MemeX
+version: 0.1.0
+status: trial
+summary: 从已验证 Analysis 或 ItemRevision 创建本地不可变 PublicationRecord。
+input_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [library, request]
+  additionalProperties: false
+  properties:
+    library: {type: string, minLength: 1}
+    request: {type: string, minLength: 1}
+output_schema:
+  $schema: https://json-schema.org/draft/2020-12/schema
+  type: object
+  required: [publication_id, status, publication_kind, sensitivity, input_count, warning_codes]
+  additionalProperties: false
+  properties:
+    publication_id: {type: string, pattern: '^publication_[0-9a-f]{64}$'}
+    status: {enum: [created, replayed]}
+    publication_kind: {enum: [briefing, dossier, publication]}
+    sensitivity: {enum: [public, internal, private, restricted]}
+    input_count: {type: integer, minimum: 1, maximum: 128}
+    warning_codes:
+      type: array
+      maxItems: 3
+      uniqueItems: true
+      items:
+        enum: [publication_markdown_projection_pending, publication_json_index_projection_pending, publication_markdown_index_projection_pending]
+side_effects: 仅在指定 library 写 immutable publications/records 及本地 derived Markdown/index；不部署、不更新 latest。
+approval: false
+docs: interfaces/memex.publication_record.md
+examples: examples/phase5-publication

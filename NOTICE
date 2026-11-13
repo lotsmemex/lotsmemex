@@ -1,0 +1,12 @@
+Lots MemeX
+Copyright 2026 The Lots MemeX Authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It includes third-party material under its own licenses:
+- remote/: transport patterns adapted from Remodex (Apache-2.0) and the jsQR
+  scanner (Apache-2.0); see remote/NOTICE.md.
+- Fonts under desktop/gpui/assets/fonts/ and mobile/web/assets/fonts/ are
+  licensed under the SIL Open Font License 1.1; their license texts ship beside them.
+- OpenCC dictionaries (Apache-2.0); see mobile/web/assets/opencc/LICENSE-OpenCC.txt.
+- vendor/dom_smoothie is MIT-licensed; see its own license file.
