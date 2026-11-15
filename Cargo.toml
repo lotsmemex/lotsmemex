@@ -57,4 +57,4 @@ zeroize = "1"
 # dom_smoothie 0.18.0 is patched in lots-scout to make equal-score candidate ordering
 # deterministic; a git dependency does not inherit that patch, so it is repeated here.
 [patch.crates-io]
-dom_smoothie = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }
+dom_smoothie = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.6" }

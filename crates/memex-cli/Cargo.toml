@@ -24,7 +24,7 @@ memex-provider = { path = "../memex-provider" }
 memex-registry = { path = "../memex-registry" }
 memex-store = { path = "../memex-store" }
 memex-surface = { path = "../memex-surface" }
-lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }
+lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.6" }
 serde_json.workspace = true
 serde.workspace = true
 uuid.workspace = true

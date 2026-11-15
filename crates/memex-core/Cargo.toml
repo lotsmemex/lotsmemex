@@ -9,7 +9,7 @@ repository.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 uuid.workspace = true
-lots-scout-types = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }
+lots-scout-types = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.6" }
 
 [dev-dependencies]
 sha2.workspace = true

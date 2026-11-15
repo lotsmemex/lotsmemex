@@ -579,7 +579,7 @@ dependencies = [
 [[package]]
 name = "dom_smoothie"
 version = "0.18.0"
-source = "git+https://github.com/lotsmemex/lots-scout?tag=v0.2.2#597b6f1ed4cecc26c3a97b79d1ff66ff59060a31"
+source = "git+https://github.com/lotsmemex/lots-scout?tag=v0.2.6#6241f1c3f13458fb24ad159e47b4b8bc4e63f26e"
 dependencies = [
  "dom_query",
  "flagset",
@@ -1294,8 +1294,8 @@ checksum = "0ceec5bc11778974d1bcb055b18002eba7f4b3518b6a0081b3af5f21666da9ad"
 
 [[package]]
 name = "lots-scout-extract"
-version = "0.2.2"
-source = "git+https://github.com/lotsmemex/lots-scout?tag=v0.2.2#597b6f1ed4cecc26c3a97b79d1ff66ff59060a31"
+version = "0.2.6"
+source = "git+https://github.com/lotsmemex/lots-scout?tag=v0.2.6#6241f1c3f13458fb24ad159e47b4b8bc4e63f26e"
 dependencies = [
  "ammonia",
  "anyhow",
@@ -1311,8 +1311,8 @@ dependencies = [
 
 [[package]]
 name = "lots-scout-types"
-version = "0.2.2"
-source = "git+https://github.com/lotsmemex/lots-scout?tag=v0.2.2#597b6f1ed4cecc26c3a97b79d1ff66ff59060a31"
+version = "0.2.6"
+source = "git+https://github.com/lotsmemex/lots-scout?tag=v0.2.6#6241f1c3f13458fb24ad159e47b4b8bc4e63f26e"
 dependencies = [
  "serde",
 ]

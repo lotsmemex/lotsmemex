@@ -24,7 +24,7 @@ memex-library = { path = "../memex-library" }
 memex-models = { path = "../memex-models" }
 memex-provider = { path = "../memex-provider" }
 memex-store = { path = "../memex-store" }
-lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }
+lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.6" }
 reqwest.workspace = true
 rusqlite.workspace = true
 serde.workspace = true

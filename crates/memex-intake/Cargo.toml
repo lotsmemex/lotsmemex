@@ -15,7 +15,7 @@ memex-analysis = { path = "../memex-analysis" }
 memex-core = { path = "../memex-core" }
 memex-capture = { path = "../memex-capture" }
 memex-store = { path = "../memex-store" }
-lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.2" }
+lots-scout-extract = { git = "https://github.com/lotsmemex/lots-scout", tag = "v0.2.6" }
 serde.workspace = true
 serde_json.workspace = true
 sha2.workspace = true
